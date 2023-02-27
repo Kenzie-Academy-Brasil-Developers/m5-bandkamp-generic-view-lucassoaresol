@@ -5,7 +5,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from .permissions import IsAccountOwner
 
 
-class UserView(generics.ListCreateAPIView):
+class UserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 

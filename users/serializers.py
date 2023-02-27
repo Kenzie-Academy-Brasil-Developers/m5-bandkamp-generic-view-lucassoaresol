@@ -4,11 +4,6 @@ from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(
-        validators=[UniqueValidator(queryset=User.objects.all())],
-    )
-    password = serializers.CharField(write_only=True)
-
     def create(self, validated_data: dict) -> User:
         return User.objects.create_superuser(**validated_data)
 
@@ -33,3 +28,4 @@ class UserSerializer(serializers.ModelSerializer):
             "last_name",
             "is_superuser",
         ]
+        extra_kwargs = {"password": {"write_only": True}}
